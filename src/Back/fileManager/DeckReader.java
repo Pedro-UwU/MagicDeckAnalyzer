@@ -85,4 +85,28 @@ public class DeckReader {
         }
         return deck;
     }
+
+    public static void ReadDeckLog(String deckName) {
+        File deckLog = new File(pathOfDecks+"/"+deckName+".csv");
+        try {
+            if (deckLog.createNewFile()){
+                StringBuilder s = new StringBuilder("COLORS,WIN,LOST\n");
+                File deckColorFile = new File("./src/Back/DeckColors.txt");
+                BufferedReader reader = new BufferedReader(new FileReader(deckColorFile));
+                String line = reader.readLine();
+                while (Optional.ofNullable(line).isPresent()) {
+                    s.append(line + ",0,0\n");
+                    line = reader.readLine();
+                }
+                FileWriter writer = new FileWriter(pathOfDecks+"/"+deckName+".csv");
+                System.out.println(s);
+                writer.write(s.toString());
+                writer.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("MISSING: DeckColors.txt");
+        } catch (IOException e) {
+            System.err.println("Error reading DeckColors.txt");
+        }
+    }
 }

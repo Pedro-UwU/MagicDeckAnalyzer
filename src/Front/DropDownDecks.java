@@ -18,9 +18,14 @@ public class DropDownDecks extends ComboBox<String> {
     }
 
     public Deck getSelectedDeck() {
-        if (this.getValue() == "Select Deck") return null;
+        if (this.getValue().equals("Select Deck")) return null;
 
         Deck deck = DeckReader.readDeck(this.getValue());
         return deck;
+    }
+
+    public boolean validSelection() {
+        if (getValue().equals("Select Deck")) return false;
+        return true;
     }
 }
