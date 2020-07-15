@@ -1,10 +1,13 @@
 package Front;
 
+import Back.api.ScryFall.ScryReader;
 import Back.fileManager.DeckReader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -20,23 +23,33 @@ public class MainFrame extends BorderPane {
         VBox buttonsBox = new VBox(5);
 
         Button deckPrinter = new Button("Print Deck");
-        deckPrinter.setPrefWidth(3*width/8);
+        deckPrinter.setPrefWidth(width/4);
         Label deckVisualizer = new Label("No deck Selected");
         ScrollPane deckScroll = new ScrollPane(deckVisualizer);
-        deckScroll.setFitToWidth(true);
-        deckVisualizer.setPrefWidth(width);
+        //deckScroll.setFitToWidth(true);
+        deckVisualizer.setPrefWidth(width/4);
         deckPrinter.setOnAction(event -> {
             if (deckList.validSelection()) deckVisualizer.setText(deckList.getSelectedDeck().toStringWithRepeated());
         });
 
         Button readCSVFromDeckButton = new Button("Read Deck Log File");
+        readCSVFromDeckButton.setPrefWidth(width/4);
         readCSVFromDeckButton.setOnAction(event -> {
             if (deckList.validSelection()) DeckReader.ReadDeckLog(deckList.getValue());
         });
 
-        buttonsBox.getChildren().addAll(deckPrinter, readCSVFromDeckButton);
+        ImageView cardShow = new ImageView();
+        cardShow.setPreserveRatio(true);
+        cardShow.setFitWidth(width/2);
 
-        desk.getChildren().addAll(buttonsBox, deckScroll);
+        Button printImageButton = new Button("Show First Card");
+        printImageButton.setPrefWidth(width/4);
+        printImageButton.setOnAction(event -> {
+            if (deckList.validSelection()) cardShow.setImage(new Image(ScryReader.getImageFromCard(deckList.getSelectedDeck().getFirstCard())));
+        });
+        buttonsBox.getChildren().addAll(deckPrinter, readCSVFromDeckButton, printImageButton);
+
+        desk.getChildren().addAll(buttonsBox, deckScroll, cardShow);
 
         this.setPrefWidth(width);
         this.setPrefHeight(height);

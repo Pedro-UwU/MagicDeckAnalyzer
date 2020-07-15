@@ -27,3 +27,4 @@ MagicDeckAnalyzer.iml
 out
 .DS_Store
 decks/*.csv
+decks/*.txt

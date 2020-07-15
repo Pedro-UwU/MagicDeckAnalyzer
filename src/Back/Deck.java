@@ -68,7 +68,6 @@ public class Deck {
 
         if (sideBoard.size() > 0) {
             prev = null;
-            System.out.println("AAAAAAA");
             s.append("\nSideboard\n");
             for (Card c : sideBoard) {
                 if (prev != null) {
@@ -83,5 +82,9 @@ public class Deck {
             s.append(repetitions + " " + prev.getName() + " (" + prev.getSet() + ")\n");
         }
         return s.toString();
+    }
+
+    public Card getFirstCard() {
+        return this.cards.get(0);
     }
 }

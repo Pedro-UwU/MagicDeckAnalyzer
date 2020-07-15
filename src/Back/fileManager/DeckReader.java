@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DeckReader {
+public abstract class DeckReader {
 
     private static final Pattern numOfCards = Pattern.compile("^[0-9]+");
     private static final Pattern nameOfCard = Pattern.compile("[0-9]+ (.*) \\(");

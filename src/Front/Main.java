@@ -1,10 +1,15 @@
 package Front;
 
+import Back.Card;
+import Back.api.ScryFall.ScryReader;
 import Back.fileManager.DeckReader;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -21,6 +26,10 @@ public class Main extends Application {
         Scene scene = new Scene(mainFrame);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        Card card = new Card("Swamp", "IKO");
+        ScryReader.getImageFromCard(card);
+
     }
 
 
