@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DropDownDecks extends ComboBox<String> {
 
-    Deck selectedDeck;
+    private Deck selectedDeck;
 
     public DropDownDecks(ArrayList<String> decks) {
         super(FXCollections.observableArrayList(decks));
@@ -18,7 +18,7 @@ public class DropDownDecks extends ComboBox<String> {
     }
 
     public Deck getSelectedDeck() {
-        if (this.getValue().equals("Select Deck")) return null;
+        if (this.getValue() == null || this.getValue().equals("Select Deck")) return null;
 
         Deck deck = DeckReader.readDeck(this.getValue());
         return deck;
@@ -27,5 +27,10 @@ public class DropDownDecks extends ComboBox<String> {
     public boolean validSelection() {
         if (getValue().equals("Select Deck")) return false;
         return true;
+    }
+
+    public void updateDecks() {
+        ArrayList<String> decks = DeckReader.readNames();
+        this.setItems(FXCollections.observableArrayList(decks));
     }
 }

@@ -25,6 +25,7 @@ public class Main extends Application {
         MainFrame mainFrame = new MainFrame(deckNames, 800, 600);
         Scene scene = new Scene(mainFrame);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         Card card = new Card("Swamp", "IKO");

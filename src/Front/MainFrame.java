@@ -3,9 +3,7 @@ package Front;
 import Back.api.ScryFall.ScryReader;
 import Back.fileManager.DeckReader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -18,45 +16,29 @@ public class MainFrame extends BorderPane {
     public MainFrame(ArrayList<String> decks, int width, int height) {
 
         DropDownDecks deckList = new DropDownDecks(decks);
-        Desk desk = new Desk(10, width);
 
-        VBox buttonsBox = new VBox(5);
+        deckList.setOnMousePressed(event -> deckList.updateDecks());
 
-        Button deckPrinter = new Button("Print Deck");
-        deckPrinter.setPrefWidth(width/4);
-        Label deckVisualizer = new Label("No deck Selected");
-        ScrollPane deckScroll = new ScrollPane(deckVisualizer);
-        //deckScroll.setFitToWidth(true);
-        deckVisualizer.setPrefWidth(width/4);
-        deckPrinter.setOnAction(event -> {
-            if (deckList.validSelection()) deckVisualizer.setText(deckList.getSelectedDeck().toStringWithRepeated());
+        TabPane tabs = new TabPane();
+        Tab tab1 = new Tab("Deck Info");
+        Tab tab2 = new Tab("Tab2");
+        Tab tab3 = new Tab("Tab3");
+        tabs.getTabs().addAll(tab1,tab2,tab3);
+
+
+        DeckInfoVisualizer deckInfo = new DeckInfoVisualizer(5, width, height);
+
+        deckList.setOnAction(event -> {
+            deckInfo.setDeck(deckList.getSelectedDeck());
         });
 
-        Button readCSVFromDeckButton = new Button("Read Deck Log File");
-        readCSVFromDeckButton.setPrefWidth(width/4);
-        readCSVFromDeckButton.setOnAction(event -> {
-            if (deckList.validSelection()) DeckReader.ReadDeckLog(deckList.getValue());
-        });
-
-        ImageView cardShow = new ImageView();
-        cardShow.setPreserveRatio(true);
-        cardShow.setFitWidth(width/2);
-
-        Button printImageButton = new Button("Show First Card");
-        printImageButton.setPrefWidth(width/4);
-        printImageButton.setOnAction(event -> {
-            if (deckList.validSelection()) cardShow.setImage(new Image(ScryReader.getImageFromCard(deckList.getSelectedDeck().getFirstCard())));
-        });
-        buttonsBox.getChildren().addAll(deckPrinter, readCSVFromDeckButton, printImageButton);
-
-        desk.getChildren().addAll(buttonsBox, deckScroll, cardShow);
-
+        tab1.setContent(deckInfo);
 
         this.setPrefWidth(width);
         this.setPrefHeight(height);
 
         this.setTop(deckList);
-        this.setCenter(desk);
+        this.setCenter(tabs);
         this.setPadding(new Insets(5));
     }
 }
