@@ -51,6 +51,7 @@ public class MainFrame extends BorderPane {
 
         desk.getChildren().addAll(buttonsBox, deckScroll, cardShow);
 
+
         this.setPrefWidth(width);
         this.setPrefHeight(height);
 
