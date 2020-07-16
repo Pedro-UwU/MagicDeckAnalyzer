@@ -28,8 +28,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        Card card = new Card("Swamp", "IKO");
-        ScryReader.getImageFromCard(card);
+        Card card = new Card("Sulfur Falls", "DAR");
+        System.out.println(ScryReader.getImageFromCard(card));
 
     }
 

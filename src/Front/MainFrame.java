@@ -6,9 +6,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class MainFrame extends BorderPane {
@@ -24,6 +25,7 @@ public class MainFrame extends BorderPane {
         Tab tab2 = new Tab("Tab2");
         Tab tab3 = new Tab("Tab3");
         tabs.getTabs().addAll(tab1,tab2,tab3);
+        tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
 
         DeckInfoVisualizer deckInfo = new DeckInfoVisualizer(5, width, height);

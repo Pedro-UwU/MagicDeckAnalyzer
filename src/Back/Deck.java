@@ -5,10 +5,10 @@ import sun.tools.asm.CatchData;
 import java.util.ArrayList;
 
 public class Deck {
-    private String name;
-    private ArrayList<Card> cards;
-    private ArrayList<Card> sideBoard;
-    private DeckColor[] colors;
+    protected String name;
+    protected ArrayList<Card> cards;
+    protected ArrayList<Card> sideBoard;
+    protected DeckColor[] colors;
 
     public Deck(String name, DeckColor[] colors) {
         this.name = name;
@@ -29,9 +29,15 @@ public class Deck {
         cards.add(card);
     }
 
+    public void addToDeck(ArrayList<Card> cards) {
+        this.cards = new ArrayList<>(cards);
+    }
+
     public void addToSideBoard(Card card) {
         sideBoard.add(card);
     }
+
+    public void addToSideBoard(ArrayList<Card> sideBoard) {this.sideBoard = new ArrayList<>(sideBoard);}
 
     public void removeFromDeck(Card card) {
         cards.remove(card);
@@ -86,5 +92,13 @@ public class Deck {
 
     public Card getFirstCard() {
         return this.cards.get(0);
+    }
+
+    public ArrayList<Card> cards() {
+        return new ArrayList<>(this.cards);
+    }
+
+    public ArrayList<Card> sideboard() {
+        return  new ArrayList<>(this.sideBoard);
     }
 }

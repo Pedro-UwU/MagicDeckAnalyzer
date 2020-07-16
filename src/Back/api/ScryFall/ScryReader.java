@@ -37,9 +37,12 @@ public class ScryReader {
     public static String getURLbyCard(Card card) {
         String name = card.getName().toLowerCase();
         String set = card.getSet();
-
         name = name.replaceAll(" ", "+");
         set = set.toLowerCase();
+
+        //dominaria set code error
+        if (set.equals("dar")) set = "dom";
+
         String request = "/cards/named?exact=" + name + "&set=" + set;
 
         return baseURL + request;

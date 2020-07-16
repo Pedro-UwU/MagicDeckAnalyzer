@@ -1,11 +1,13 @@
 package Back;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.awt.*;
 
 public class Card {
     private String name;
     private String description;
-    private String set;
+    private String  set;
 
     public Card(String name, String set) {
         this.name = name;
@@ -23,6 +25,7 @@ public class Card {
     public String getSet() {
         return set;
     }
+
 
     @Override
     public boolean equals(Object o) {
