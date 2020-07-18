@@ -1,15 +1,8 @@
 package Front;
 
-import Back.api.ScryFall.ScryReader;
-import Back.fileManager.DeckReader;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 public class MainFrame extends BorderPane {

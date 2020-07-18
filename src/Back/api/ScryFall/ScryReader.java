@@ -41,9 +41,10 @@ public class ScryReader {
         set = set.toLowerCase();
 
         //dominaria set code error
-        if (set.equals("dar")) set = "dom";
+        set.replaceAll("dar","dom");
+        String request = "/cards/named?exact=" + name;
+        if (!set.equals("jmp")) request += "&set=" + set;
 
-        String request = "/cards/named?exact=" + name + "&set=" + set;
 
         return baseURL + request;
     }
