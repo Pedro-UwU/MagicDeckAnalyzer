@@ -1,7 +1,7 @@
 package Front;
 
 import Back.Deck;
-import Back.fileManager.DeckReader;
+import Back.DeckReader;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;
 

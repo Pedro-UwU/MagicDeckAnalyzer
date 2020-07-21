@@ -1,4 +1,4 @@
-package Back.fileManager;
+package Back;
 
 import Back.Card;
 import Back.Deck;
@@ -77,13 +77,14 @@ public abstract class DeckReader {
 
                     line = reader.readLine();
                 }
+
                 return deck;
             } catch (IOException e){
                 System.out.println("CAN'T READ DECK");
                 deck = null;
             }
         }
-        return deck;
+        return null;
     }
 
     public static void ReadDeckLog(String deckName) {
@@ -107,6 +108,18 @@ public abstract class DeckReader {
             System.err.println("MISSING: DeckColors.txt");
         } catch (IOException e) {
             System.err.println("Error reading DeckColors.txt");
+        }
+    }
+
+    public static void createDeck(String name, String body) {
+        File deckFile = new File(pathOfDecks+"/"+name+".txt");
+        try {
+            deckFile.createNewFile();
+            FileWriter fileWriter = new FileWriter(deckFile, false);
+            fileWriter.write(body);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

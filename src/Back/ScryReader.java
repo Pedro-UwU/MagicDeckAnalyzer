@@ -1,4 +1,4 @@
-package Back.api.ScryFall;
+package Back;
 
 import Back.Card;
 import com.oracle.javafx.jmx.json.JSONReader;
@@ -41,7 +41,7 @@ public class ScryReader {
         set = set.toLowerCase();
 
         //dominaria set code error
-        set.replaceAll("dar","dom");
+        if (set.equals("dar")) set = "dom";
         String request = "/cards/named?exact=" + name;
         if (!set.equals("jmp")) request += "&set=" + set;
 

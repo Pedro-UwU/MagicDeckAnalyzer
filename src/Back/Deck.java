@@ -101,4 +101,6 @@ public class Deck {
     public ArrayList<Card> sideboard() {
         return  new ArrayList<>(this.sideBoard);
     }
+
+    public boolean hasSideboard() { return sideBoard.size() > 0;}
 }
