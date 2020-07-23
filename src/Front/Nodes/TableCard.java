@@ -1,4 +1,4 @@
-package Front.Table;
+package Front.Nodes;
 
 import Back.Card;
 import javafx.beans.property.SimpleIntegerProperty;

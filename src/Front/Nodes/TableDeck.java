@@ -1,8 +1,7 @@
-package Front.Table;
+package Front.Nodes;
 
 import Back.Card;
 import Back.Deck;
-import Back.DeckColor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -38,7 +37,6 @@ public class TableDeck extends Deck {
                 tableSideboard.add(card);
             }
         }
-        tableSideboard.forEach(s -> System.out.println(s.toString()));
     }
 
     public ObservableList<TableCard> getTableCards() {

@@ -1,17 +1,10 @@
-package Front.Table;
+package Front.Nodes;
 
 
-import Back.Card;
-import Back.Deck;
-import Back.ScryReader;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-
-import java.util.ArrayList;
 
 public class DeckInfoTable extends TableView<TableCard> {
 

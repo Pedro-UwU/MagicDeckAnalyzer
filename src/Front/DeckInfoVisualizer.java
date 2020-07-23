@@ -3,8 +3,8 @@ package Front;
 import Back.Card;
 import Back.Deck;
 import Back.ScryReader;
-import Front.Table.DeckInfoTable;
-import Front.Table.TableDeck;
+import Front.Nodes.DeckInfoTable;
+import Front.Nodes.TableDeck;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -23,21 +23,21 @@ public class DeckInfoVisualizer extends HBox {
 
 
     Deck deck;
-    int space, width, height;
+    int spacing, width, height;
 
-    public DeckInfoVisualizer(int space, int width, int height) {
-        super(space);
-        this.space = space;
+    public DeckInfoVisualizer(int spacing, int width, int height) {
+        super(spacing);
+        this.spacing = spacing;
         this.width = width;
         this.height = height;
-        this.setPadding(new Insets(space,0,space,0));
+        this.setPadding(new Insets(spacing,0,spacing,0));
 
         cardView.setPreserveRatio(true);
 
 
         cardImageBox.setAlignment(Pos.CENTER_RIGHT);
         cardImageBox.getChildren().addAll(cardView);
-        cardView.setFitWidth(width/2 - 5*space);
+        cardView.setFitWidth(width/2 - 5*spacing);
 
         deckTable.setOnMouseClicked(event -> {
             Card c = deckTable.getSelectionModel().getSelectedItem();
@@ -51,7 +51,6 @@ public class DeckInfoVisualizer extends HBox {
         deckTable.setMinWidth(width/2);
         sideTable.setMinWidth(width/2);
 
-        //deckTable.setMaxHeight(4f*height/5 - space);
         deckTable.setPrefHeight(height);
         sideTable.setMinHeight(2*height/5f);
 
@@ -66,9 +65,9 @@ public class DeckInfoVisualizer extends HBox {
             cardView.setImage(null);
             this.getChildren().clear();
             if (d.hasSideboard()) {
-                this.getChildren().addAll(new VBox(space, new Label("Deck"), deckTable, new Label("Sideboard"), sideTable),cardImageBox);
+                this.getChildren().addAll(new VBox(spacing, new Label("Deck"), deckTable, new Label("Sideboard"), sideTable),cardImageBox);
             } else {
-                this.getChildren().addAll(new VBox(space, new Label("Deck"), deckTable),cardImageBox);
+                this.getChildren().addAll(new VBox(spacing, new Label("Deck"), deckTable),cardImageBox);
             }
         }
     }

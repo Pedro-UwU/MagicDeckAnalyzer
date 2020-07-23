@@ -1,20 +1,25 @@
 package Back;
 
-import sun.tools.asm.CatchData;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 public class Deck {
     protected String name;
     protected ArrayList<Card> cards;
     protected ArrayList<Card> sideBoard;
     protected DeckColor[] colors;
+    private LinkedHashMap<String, Pair<Integer, Integer>> deckStats;
 
     public Deck(String name, DeckColor[] colors) {
         this.name = name;
         this.colors = colors;
         this.cards = new ArrayList<>();
         this.sideBoard = new ArrayList<>();
+        this.deckStats = DeckFileManager.loadHash(name);
     }
 
     public DeckColor[] getColors() {
@@ -103,4 +108,56 @@ public class Deck {
     }
 
     public boolean hasSideboard() { return sideBoard.size() > 0;}
+
+    public String statsToString() {
+        StringBuilder s = new StringBuilder("Stats:\n");
+        for (String key : deckStats.keySet()) {
+            Pair<Integer, Integer> stat = deckStats.get(key);
+            if (stat != null) {
+                s.append("COLORS: " + key + ">>>WINS: " + stat.getKey() + " -- LOSES: " + stat.getValue() + "\n");
+            } else {
+                return "NULL ELEMENT";
+            }
+        }
+        return s.toString();
+    }
+
+    public Integer getWins(String colors) {
+        return deckStats.get(colors).getKey();
+    }
+
+    public Integer getLoses(String colors) {
+        return deckStats.get(colors).getValue();
+    }
+
+    public void incWin(String colors) {
+        Pair<Integer, Integer> currentStats = deckStats.get(colors);
+        if (currentStats != null) {
+            deckStats.put(colors, new Pair<Integer, Integer>(currentStats.getKey() + 1, currentStats.getValue()));
+        }
+        System.out.println(deckStats.get(colors));
+    }
+
+    public void incLoses(String colors) {
+        Pair<Integer, Integer> currentStats = deckStats.get(colors);
+        if (currentStats != null) {
+            deckStats.put(colors, new Pair<Integer, Integer>(currentStats.getKey(), currentStats.getValue()+1));
+        }
+        System.out.println(deckStats.get(colors));
+    }
+
+    public void saveStats() {
+        DeckFileManager.writeHash(name, deckStats);
+    }
+
+    public String getStats() {
+        StringBuilder s = new StringBuilder();
+        for (String key : DeckFileManager.getColorsArray()) {
+            Pair<Integer, Integer> statValue = deckStats.get(key);
+            if (statValue.getKey()>0 || statValue.getValue()>0) {
+                s.append("Color: " + key + ", Wins: " + statValue.getKey() + ", Loses: " + statValue.getValue() + "\n");
+            }
+        }
+        return s.toString();
+    }
 }

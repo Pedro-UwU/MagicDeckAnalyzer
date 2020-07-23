@@ -1,12 +1,14 @@
 package Front;
 
-import Back.DeckReader;
+import Back.DeckFileManager;
 import Front.Menu.AppMenu;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -14,13 +16,9 @@ public class Main extends Application {
     ArrayList<String> deckNames = new ArrayList<>();
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
 
-        //read deck Files
-        deckNames = DeckReader.readNames();
-
-
-        MainFrame mainFrame = new MainFrame(deckNames, 800, 600);
+        MainFrame mainFrame = new MainFrame(800, 600);
         Scene scene = new Scene(new VBox(new AppMenu(), mainFrame));
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

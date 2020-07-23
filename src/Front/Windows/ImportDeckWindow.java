@@ -1,6 +1,6 @@
 package Front.Windows;
 
-import Back.DeckReader;
+import Back.DeckFileManager;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,7 +31,7 @@ public class ImportDeckWindow {
             String name = deckNameField.getText();
             String body = deckBodyField.getText();
             if (!name.isEmpty() && !body.isEmpty()) {
-                DeckReader.createDeck(name, body);
+                DeckFileManager.createDeck(name, body);
                 window.close();
             }
         });

@@ -1,7 +1,7 @@
 package Front;
 
 import Back.Deck;
-import Back.DeckReader;
+import Back.DeckFileManager;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;
 
@@ -11,8 +11,9 @@ public class DropDownDecks extends ComboBox<String> {
 
     private Deck selectedDeck;
 
-    public DropDownDecks(ArrayList<String> decks) {
-        super(FXCollections.observableArrayList(decks));
+    public DropDownDecks() {
+        super();
+        updateDecks();
         this.setValue("Select Deck");
         this.setPrefWidth(Float.POSITIVE_INFINITY);
     }
@@ -20,7 +21,7 @@ public class DropDownDecks extends ComboBox<String> {
     public Deck getSelectedDeck() {
         if (this.getValue() == null || this.getValue().equals("Select Deck")) return null;
 
-        Deck deck = DeckReader.readDeck(this.getValue());
+        Deck deck = DeckFileManager.readDeck(this.getValue());
         return deck;
     }
 
@@ -30,7 +31,7 @@ public class DropDownDecks extends ComboBox<String> {
     }
 
     public void updateDecks() {
-        ArrayList<String> decks = DeckReader.readNames();
+        ArrayList<String> decks = DeckFileManager.readNames();
         this.setItems(FXCollections.observableArrayList(decks));
     }
 }
